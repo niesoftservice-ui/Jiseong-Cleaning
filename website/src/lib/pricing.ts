@@ -49,7 +49,7 @@ export const priceGroups: PriceGroup[] = [
     ],
   },
   {
-    label: "주방 · 테이블 리넨",
+    label: "주방 · 테이블 세탁물",
     items: [
       { name: "식탁보 (대)", price: 1500 },
       { name: "식탁보 (소)", price: 800 },
@@ -80,10 +80,10 @@ export const priceTerms: { label: string; value: string; note?: string }[] = [
   {
     label: "최소 발주 금액",
     value: "30,000원",
-    note: "미만은 수거 · 납품비 부과 또는 접수 제한",
+    note: "미만은 수거 · 배송비 부과 또는 접수 제한",
   },
   {
-    label: "수거 · 납품비",
+    label: "수거 · 배송비",
     value: "정기 거래처 무료",
     note: "단발 소량은 3,000 ~ 5,000원 · 지역 · 물량별 협의",
   },
@@ -101,6 +101,6 @@ export const priceTerms: { label: string; value: string; note?: string }[] = [
 /** 어떤 서비스 페이지에 어느 분류를 보여줄지 */
 export const priceGroupsByService: Record<string, string[]> = {
   linen: ["침구류", "수건류", "가운 · 유니폼"],
-  kitchen: ["주방 · 테이블 리넨", "가운 · 유니폼"],
-  contract: ["침구류", "수건류", "주방 · 테이블 리넨"],
+  kitchen: ["주방 · 테이블 세탁물", "가운 · 유니폼"],
+  contract: ["침구류", "수건류", "주방 · 테이블 세탁물"],
 };

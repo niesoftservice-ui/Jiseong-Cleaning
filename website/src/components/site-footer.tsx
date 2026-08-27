@@ -3,6 +3,7 @@ import { BrandLockup } from "./brand-mark";
 import { Container } from "./ui";
 import { businessInfo, SAMPLE_CONTENT } from "@/lib/sample";
 import { services } from "@/lib/services";
+import { Icon } from "./icons";
 import { site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -15,11 +16,49 @@ export function SiteFooter() {
             <address className="not-italic leading-[1.85]">
               {site.address}
               <br />
-              대표전화{" "}
+              <span data-copy-key="footer.telLabel">대표전화</span>{" "}
               <a href={site.telHref} className="text-pale hover:text-white" data-numeric>
-                {site.tel}
+                <span data-copy-key="footer.tel">{site.tel}</span>
               </a>
             </address>
+
+            {/* SNS — 계정 주소를 site.social 에 채우면 그때부터 보인다 */}
+            {(site.social.instagram || site.social.blog) && (
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {site.social.instagram && (
+                  <li>
+                    <a
+                      href={site.social.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-brand bg-white/10 px-3 py-2 text-[0.8125rem] font-bold text-pale hover:text-white"
+                    >
+                      <Icon.camera className="size-4" />
+                      인스타그램
+                      {site.social.isPlaceholder && (
+                        <span className="text-[0.6875rem] font-normal opacity-70">준비중</span>
+                      )}
+                    </a>
+                  </li>
+                )}
+                {site.social.blog && (
+                  <li>
+                    <a
+                      href={site.social.blog}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-brand bg-white/10 px-3 py-2 text-[0.8125rem] font-bold text-pale hover:text-white"
+                    >
+                      <Icon.doc className="size-4" />
+                      블로그
+                      {site.social.isPlaceholder && (
+                        <span className="text-[0.6875rem] font-normal opacity-70">준비중</span>
+                      )}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            )}
             <p className="mt-3 leading-[1.85]">
               지성크리닝은{" "}
               <a
@@ -58,7 +97,6 @@ export function SiteFooter() {
             </h2>
             <ul className="flex flex-col gap-2.5">
               {[
-                { href: "/facility", label: "시설 · 공정" },
                 { href: "/about", label: "회사소개" },
                 { href: "/about#standard-workplace", label: "장애인 표준사업장" },
                 { href: "/quote", label: "견적 문의" },

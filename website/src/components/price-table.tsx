@@ -135,7 +135,7 @@ export function PriceTable({
         <>
           {isDraft && (
             <p className="mt-6 mb-3 text-[0.8125rem] font-semibold text-warn">
-              아래 조건도 확정 전 초안입니다. 최소 발주 · 수거 납품비 · 정산 방식은
+              아래 조건도 확정 전 초안입니다. 최소 발주 · 수거 배송비 · 정산 방식은
               상담 시 협의합니다.
             </p>
           )}

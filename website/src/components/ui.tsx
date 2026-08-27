@@ -52,7 +52,7 @@ export function SectionHead({
   align = "left",
   className = "",
 }: {
-  eyebrow?: string;
+  eyebrow?: ReactNode;
   title: ReactNode;
   lede?: ReactNode;
   tone?: "light" | "dark";
@@ -309,3 +309,38 @@ export function Alert({
 
 /* 사진 자리표시자는 IllustrationCard(components/illustration.tsx)로 대체됐다.
    실사 촬영이 끝나면 그 컴포넌트 자리를 next/image 로 바꾼다. */
+
+/**
+ * 문의 버튼.
+ *
+ * 모바일은 눌러서 전화가 걸리고, PC 는 전화를 걸 수 없으므로 견적 문의 페이지로 보낸다.
+ * (2차 회의: "PC 접속이면 견적 문의로 바로 가는 버튼")
+ * 서버 렌더링이라 기기 판별 대신 CSS 로 나눈다.
+ */
+export function PhoneAction({
+  tel,
+  telHref,
+  variant,
+  size,
+  block,
+  className = "",
+  children,
+}: {
+  tel: string;
+  telHref: string;
+  children?: ReactNode;
+} & ButtonLook & { className?: string }) {
+  const cls = look({ variant, size, block }, className);
+  return (
+    <>
+      <a href={telHref} className={`${cls} lg:hidden`}>
+        {children}
+        <span data-numeric>{tel}</span>
+      </a>
+      <Link href="/quote" className={`${cls} hidden lg:inline-flex`}>
+        {children}
+        견적 문의
+      </Link>
+    </>
+  );
+}

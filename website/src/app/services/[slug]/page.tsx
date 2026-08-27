@@ -14,9 +14,7 @@ import {
   Section,
   SectionHead,
 } from "@/components/ui";
-import { PriceTable } from "@/components/price-table";
 import { getService, processSteps, services } from "@/lib/services";
-import { priceGroups, priceGroupsByService } from "@/lib/pricing";
 import { site } from "@/lib/site";
 
 /** 세 페이지 모두 빌드 시점에 정적으로 생성한다 */
@@ -49,10 +47,6 @@ export default async function ServiceDetailPage({
   const others = services.filter((s) => s.slug !== service.slug);
   const Glyph = Icon[service.icon];
 
-  // 이 서비스와 관련된 단가 분류만 보여준다 — 전체를 다 띄우면 읽지 않는다
-  const wanted = priceGroupsByService[service.slug] ?? [];
-  const groupsForService = priceGroups.filter((g) => wanted.includes(g.label));
-
   return (
     <>
       <PageHero
@@ -73,41 +67,9 @@ export default async function ServiceDetailPage({
         }
       />
 
-      {/* ═══════════════ 취급 품목 ═══════════════ */}
+      {/* ═══════════════ 상담 안내 ═══════════════ */}
       <Section tone="white">
         <Container>
-          <Reveal>
-            <SectionHead
-              eyebrow="취 급 품 목"
-              title="이 서비스로 처리하는 품목입니다"
-              lede="목록에 없는 품목도 상담 가능합니다. 커튼·카펫처럼 크기와 소재에 따라 달라지는 품목은 별도 협의로 진행합니다."
-            />
-          </Reveal>
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {service.itemGroups.map((group, i) => (
-              <Reveal key={group.label} delay={i * 70}>
-                <Card className="h-full p-6">
-                  <h3 className="flex items-center gap-2.5 text-[0.6875rem] font-bold tracking-[0.14em] text-faint">
-                    <span className="h-0.5 w-4 rounded-full bg-pale" aria-hidden="true" />
-                    {group.label}
-                  </h3>
-                  <ul className="mt-4 flex flex-col">
-                    {group.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex gap-2.5 border-b border-dashed border-line py-2.5 text-[0.9375rem] text-ink-2 last:border-b-0"
-                      >
-                        <Icon.check className="mt-1 size-3.5 shrink-0 text-sky" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-
           <Reveal delay={140}>
             <Alert tone="warn" className="mt-8 max-w-3xl">
               {service.priceNote}
@@ -117,23 +79,6 @@ export default async function ServiceDetailPage({
       </Section>
 
       {/* ═══════════════ 표준 단가 ═══════════════ */}
-      <Section tone="paper">
-        <Container>
-          <Reveal>
-            <SectionHead
-              eyebrow="표 준 단 가"
-              title="물량과 주기에 따라 여기서 조정됩니다"
-              lede="아래는 표준 단가이고, 거래처별 계약 단가는 물량·주기·품목 구성에 따라 따로 산정합니다."
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-9">
-              <PriceTable groups={groupsForService} showOptions showTerms />
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
-
       {/* ═══════════════ 운영 방식 ═══════════════ */}
       <Section tone="tint">
         <Container>
@@ -163,8 +108,7 @@ export default async function ServiceDetailPage({
           <Reveal>
             <SectionHead
               eyebrow="이 용 절 차"
-              title="첫 통화부터 첫 납품까지 네 단계"
-              lede="주기를 정하고 나면 그 일정에 맞춰 수거와 납품이 이어집니다."
+              title="첫 상담부터 배송까지"
             />
           </Reveal>
 

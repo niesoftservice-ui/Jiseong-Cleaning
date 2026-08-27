@@ -1,25 +1,16 @@
 import type { Metadata } from "next";
+import { Editable } from "@/components/editable";
 import Link from "next/link";
 import { Icon } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
-import {
-  ButtonAnchor,
-  ButtonLink,
-  Card,
-  Chip,
-  Container,
-  IconBubble,
-  Section,
-  SectionHead,
-} from "@/components/ui";
+import { Card, Chip, Container, IconBubble, Section } from "@/components/ui";
 import { services } from "@/lib/services";
-import { site } from "@/lib/site";
 import { PageHero } from "@/components/page-hero";
 
 export const metadata: Metadata = {
   title: "서비스",
   description:
-    "호텔·모텔·펜션 린넨 세탁, 식당·급식소 주방 리넨 세탁, 월세탁 정기 계약. 취급 품목과 운영 방식을 안내합니다.",
+    "호텔·모텔·펜션·사우나·헬스장 세탁물 정기 관리. 운영 방식을 안내합니다.",
   alternates: { canonical: "/services" },
 };
 
@@ -27,9 +18,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="서 비 스"
-        title="사업장 규모와 주기에 맞춰 세 가지로 운영합니다"
-        lede="어느 쪽이 맞는지 판단이 어려우시면 현재 이용 중인 방식과 월 물량만 알려주세요. 비교해서 제안해 드립니다."
+        eyebrow={<Editable k="services.eyebrow">서 비 스</Editable>}
+        title={<Editable k="services.title">사업장 규모, 품목과 물량에 따라 주기적으로 관리해드립니다</Editable>}
       />
 
       <Section tone="white">
@@ -48,25 +38,6 @@ export default function ServicesPage() {
                     <p className="mt-2.5 text-sm leading-[1.75] text-ink-2">
                       {service.summary}
                     </p>
-
-                    <div className="mt-5">
-                      <h3 className="text-[0.6875rem] font-bold tracking-[0.14em] text-faint">
-                        주 요 품 목
-                      </h3>
-                      <ul className="mt-2.5 flex flex-col gap-1.5 text-sm text-ink-2">
-                        {service.itemGroups
-                          .flatMap((g) => g.items)
-                          .slice(0, 5)
-                          .map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="text-sky" aria-hidden="true">
-                                ·
-                              </span>
-                              {item}
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
 
                     <ul className="mt-5 flex flex-wrap gap-1.5">
                       {service.forWhom.map((w) => (
@@ -91,29 +62,6 @@ export default function ServicesPage() {
         </Container>
       </Section>
 
-      <Section tone="tint">
-        <Container>
-          <Reveal>
-            <div className="flex flex-wrap items-center justify-between gap-6">
-              <SectionHead
-                title="어느 쪽인지 모르셔도 됩니다"
-                lede="품목과 주당 물량만 알려주시면 어떤 방식이 유리한지 비교해 드립니다."
-                className="flex-1 basis-[24rem]"
-              />
-              <div className="flex flex-wrap gap-3">
-                <ButtonLink href="/quote" size="lg">
-                  견적 문의하기
-                  <Icon.arrowRight className="size-4" />
-                </ButtonLink>
-                <ButtonAnchor href={site.telHref} variant="ghost" size="lg">
-                  <Icon.phone className="size-[1.0625rem]" />
-                  <span data-numeric>{site.tel}</span>
-                </ButtonAnchor>
-              </div>
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
     </>
   );
 }

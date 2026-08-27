@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandLockup } from "./brand-mark";
 import { Icon } from "./icons";
-import { ButtonLink, Container } from "./ui";
+import { Container } from "./ui";
 import { nav, site } from "@/lib/site";
 
 export function SiteHeader() {
@@ -69,18 +69,23 @@ export function SiteHeader() {
                     : "text-ink-2 hover:bg-tint hover:text-navy"
                 }`}
               >
-                {item.label}
+                <span data-copy-key={`nav.${item.href}`}>{item.label}</span>
               </Link>
             ))}
           </nav>
 
           <div className="ml-auto flex items-center gap-3 lg:ml-0">
+            {/*
+              번호 표시.
+              PC 는 눌러도 아무 일이 없어야 한다는 요청(2차 회의)에 따라 링크를 걸지 않고,
+              전화가 실제로 걸리는 화면 폭에서만 tel: 링크로 바꾼다.
+            */}
             <a
               href={site.telHref}
-              className="hidden rounded-brand leading-tight md:block"
+              className="rounded-brand leading-tight md:block lg:hidden"
             >
               <span className="block text-[0.65rem] font-bold tracking-[0.1em] text-muted">
-                상담 및 견적 문의
+                전화 문의
               </span>
               <span
                 className="block text-[1.1875rem] font-extrabold tracking-[-0.02em] text-navy"
@@ -89,10 +94,21 @@ export function SiteHeader() {
                 {site.tel}
               </span>
             </a>
-
-            <ButtonLink href="/quote" size="sm" className="hidden lg:inline-flex">
-              견적 문의
-            </ButtonLink>
+            <span className="hidden rounded-brand leading-tight lg:block">
+              <span
+                className="block text-[0.65rem] font-bold tracking-[0.1em] text-muted"
+                data-copy-key="header.telLabel"
+              >
+                전화 문의
+              </span>
+              <span
+                className="block text-[1.1875rem] font-extrabold tracking-[-0.02em] text-navy"
+                data-numeric
+                data-copy-key="site.tel"
+              >
+                {site.tel}
+              </span>
+            </span>
 
             <button
               type="button"

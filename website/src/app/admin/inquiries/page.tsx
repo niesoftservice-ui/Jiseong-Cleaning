@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { countInquiries, listInquiries, storageBackend } from "@/lib/inquiries";
 import { Container } from "@/components/ui";
 import { site } from "@/lib/site";
@@ -34,6 +35,11 @@ export default async function AdminInquiriesPage() {
               관 리 자
             </p>
             <h1 className="mt-1.5 text-[1.625rem] text-navy">견적 문의 목록</h1>
+            <p className="mt-1.5 text-sm">
+              <Link href="/admin/copy" className="font-bold text-brand">
+                문구 수정안 쓰기 →
+              </Link>
+            </p>
             <p className="mt-2 text-sm text-muted">
               총{" "}
               <strong className="font-bold text-navy" data-numeric>
@@ -63,10 +69,8 @@ export default async function AdminInquiriesPage() {
                   {[
                     "접수",
                     "업체 · 업종",
-                    "담당자 · 연락처",
-                    "지역",
-                    "품목",
-                    "물량 · 주기",
+                    "성함 · 연락처",
+                    "주소",
                     "문의 내용",
                   ].map((h) => (
                     <th
@@ -113,13 +117,6 @@ export default async function AdminInquiriesPage() {
                     </td>
                     <td className="border-b border-line px-4 py-3.5 text-ink-2">
                       {q.region}
-                    </td>
-                    <td className="border-b border-line px-4 py-3.5 text-ink-2">
-                      {q.itemsText || "—"}
-                    </td>
-                    <td className="border-b border-line px-4 py-3.5 text-ink-2">
-                      <span className="block">{q.volume || "—"}</span>
-                      <span className="text-[0.78rem] text-muted">{q.cycle || "—"}</span>
                     </td>
                     <td className="border-b border-line px-4 py-3.5 text-ink-2">
                       <span className="block max-w-[22rem] whitespace-pre-wrap">

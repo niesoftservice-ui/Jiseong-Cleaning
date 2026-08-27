@@ -18,7 +18,6 @@ import type { InquiryInput } from "./schema";
 export type Inquiry = InquiryInput & {
   id: number;
   createdAt: string;
-  itemsText: string;
 };
 
 /** Netlify 빌드·런타임에서 자동으로 설정되는 환경변수 */
@@ -35,7 +34,6 @@ function toInquiry(id: number, createdAt: string, input: InquiryInput): Inquiry 
     ...input,
     id,
     createdAt,
-    itemsText: input.items.join(", "),
     consent: true,
   };
 }
@@ -161,9 +159,9 @@ async function saveToSqlite(input: InquiryInput): Promise<number> {
       input.phone,
       input.email,
       input.region,
-      input.items.join(", "),
-      input.volume,
-      input.cycle,
+      "",
+      "",
+      "",
       input.message,
     );
 
@@ -187,10 +185,6 @@ async function listFromSqlite(limit: number): Promise<Inquiry[]> {
     phone: r.phone,
     email: r.email,
     region: r.region,
-    items: r.items ? (r.items.split(", ") as InquiryInput["items"]) : [],
-    itemsText: r.items,
-    volume: r.volume,
-    cycle: r.cycle as InquiryInput["cycle"],
     message: r.message,
     consent: true,
   }));

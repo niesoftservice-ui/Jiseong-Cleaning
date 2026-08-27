@@ -165,6 +165,23 @@
   }
 }
 
+/* ── 후기 띠 ────────────────────────────────────────────────
+   같은 목록을 두 벌 이어 붙이고 절반만큼 옮기면 끊김 없이 반복된다.
+   마우스를 올리면 멈춘다. */
+@keyframes review-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.review-marquee-track {
+  animation: review-scroll 42s linear infinite;
+}
+
+.review-marquee:hover .review-marquee-track,
+.review-marquee:focus-within .review-marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -176,6 +193,14 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .review-marquee-track {
+    animation: none;
+  }
+
+  .review-marquee {
+    overflow-x: auto;
   }
 
   .hero-enter > * {

@@ -2,26 +2,26 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { FloatingCta } from "@/components/floating-cta";
 import { MobileCtaBar } from "@/components/mobile-cta-bar";
-import { SampleBanner } from "@/components/sample-banner";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} · 사업장 린넨 세탁 수거·납품`,
+    default: `${site.name} · 사업장 세탁물 세탁 수거·배송`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
-    "경주 린넨 세탁",
-    "호텔 린넨 세탁",
+    "경주 세탁물 세탁",
+    "호텔 세탁물 세탁",
     "모텔 침구 세탁",
     "펜션 세탁 업체",
-    "식당 행주 수거",
-    "급식소 앞치마 세탁",
-    "업소용 세탁",
+    "사우나 수건 세탁",
+    "헬스장 수건 세탁",
+        "전문 세탁",
     "월세탁",
     "장애인 표준사업장",
   ],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ko_KR",
     siteName: site.name,
-    title: `${site.name} · 사업장 린넨 세탁 수거·납품`,
+    title: `${site.name} · 사업장 세탁물 세탁 수거·배송`,
     description: site.description,
     url: site.url,
   },
@@ -62,15 +62,15 @@ function LocalBusinessJsonLd() {
       addressCountry: "KR",
       addressRegion: "경상북도",
       addressLocality: "경주시",
-      streetAddress: "천북면 모서안길 44",
+      streetAddress: "강동면 모서안길 44",
     },
     areaServed: { "@type": "AdministrativeArea", name: "경상북도 경주시" },
     knowsAbout: [
-      "호텔 린넨 세탁",
+      "호텔 세탁물 세탁",
       "모텔 침구 세탁",
-      "펜션 린넨 세탁",
-      "식당 행주 세탁",
-      "업소용 대량 세탁",
+      "펜션 세탁물 세탁",
+      "사우나 · 헬스장 수건 세탁",
+            "전문 대량 세탁",
     ],
   };
 
@@ -93,10 +93,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           본문으로 건너뛰기
         </a>
-        <SampleBanner />
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <FloatingCta />
         <MobileCtaBar />
         <LocalBusinessJsonLd />
       </body>

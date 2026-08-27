@@ -58,16 +58,21 @@ export const site = {
   parent: "(주)지성이엔지",
   parentUrl: "http://jiseong.co.kr/", // www 를 붙이면 도메인 파킹 스텁으로 간다(2026-08-14 실측)
 
-  tagline: "사업장 린넨을 수거부터 배달까지 대신 관리합니다",
+  tagline: "수거부터 배송까지 사업장 세탁물을 대신 관리해드립니다",
   description:
-    "경주 천북면 자체 세탁 시설을 갖춘 장애인 표준사업장. 호텔·모텔·펜션 린넨과 식당·급식소 행주를 정해진 주기로 수거·세탁·납품합니다.",
+    "경주 강동면 자체 세탁 시설을 갖춘 장애인 표준사업장. 호텔·모텔·펜션과 사우나·헬스장 세탁물을 약속한 날짜에 수거해 세탁·살균을 거쳐 배송합니다.",
 
-  tel: "054-621-5002",
+  tel: "010-9828-3637",
   /** tel: 링크용 — 하이픈 제거 */
-  telHref: "tel:+82546215002",
+  telHref: "tel:+821098283637",
+  /**
+   * 문자 보내기 링크. 누르면 본문이 채워진 채로 문자 앱이 열린다.
+   * iOS 는 `&body=`, 안드로이드는 `?body=` 를 쓰는데 `?` 하나로 양쪽 다 붙는다.
+   */
+  smsHref: "sms:+821098283637?body=지성크리닝 문의드립니다.",
 
-  address: "경상북도 경주시 천북면 모서안길 44",
-  addressShort: "경주시 천북면 모서안길 44",
+  address: "경상북도 경주시 강동면 모서안길 44",
+  addressShort: "경주시 강동면 모서안길 44",
   region: "경상북도 경주시",
 
   /** 모회사 본사 주소 — jiseong.co.kr 푸터에서 확인한 실제 값(2026-08-17) */
@@ -75,8 +80,19 @@ export const site = {
 
   /** 지도 앱 길찾기 — API 키가 필요 없는 검색 링크 */
   mapLinks: {
-    naver: "https://map.naver.com/p/search/경주시%20천북면%20모서안길%2044",
-    kakao: "https://map.kakao.com/?q=경주시%20천북면%20모서안길%2044",
+    naver: "https://map.naver.com/p/search/경주시%20강동면%20모서안길%2044",
+    kakao: "https://map.kakao.com/?q=경주시%20강동면%20모서안길%2044",
+  },
+
+  /**
+   * SNS 계정. 2차 회의에서 "만들어 두고 나중에 운영한다"로 정리했다.
+   * 주소를 채우면 푸터에 자동으로 노출되고, 빈 값이면 아예 그려지지 않는다.
+   */
+  social: {
+    // ⚠️ 계정 개설 전 임시 주소다. 실제 계정이 생기면 여기만 바꾼다(2차 회의)
+    instagram: "https://www.instagram.com/",
+    blog: "https://blog.naver.com/",
+    isPlaceholder: true,
   },
 
   /** 사이트 주소 — 사이트맵·OG·구조화 데이터가 쓴다. 아래 resolveSiteUrl() 참고 */
@@ -85,30 +101,28 @@ export const site = {
 
 /** 상단·하단 공통 내비게이션 */
 export const nav = [
-  { href: "/services", label: "서비스" },
-  { href: "/facility", label: "시설 · 공정" },
   { href: "/about", label: "회사소개" },
+  { href: "/services", label: "서비스" },
   { href: "/quote", label: "견적 문의" },
 ] as const;
 
 /** 히어로와 회사소개에서 쓰는 신뢰 근거 */
 export const trustPoints = [
   "장애인 표준사업장",
-  "월 단위 정기 계약 가능",
-  "경주 천북면 자체 세탁 시설",
+  "사업장 단위 정기 계약",
+  "경주 강동면 자체 세탁 시설",
 ] as const;
 
 /**
- * 적합 업종.
- * 가정(아파트·빌라) 고객은 이 사이트 범위가 아니다 — 사업장 전용.
+ * 적합 업종. 2차 회의에서 여섯 가지로 확정했다.
+ * 기업체·급식소·식당은 뺐다(Document/웹사이트-2차회의-수정사항.md 3-2).
  */
 export const targetIndustries = [
   { label: "호텔", icon: "hotel" },
   { label: "모텔", icon: "motel" },
   { label: "펜션", icon: "pension" },
-  { label: "기업체", icon: "office" },
-  { label: "급식소 · 식당", icon: "kitchen" },
-  { label: "단체시설", icon: "group" },
+  { label: "사우나", icon: "sauna" },
+  { label: "헬스장", icon: "gym" },
 ] as const;
 
 export type IndustryIcon = (typeof targetIndustries)[number]["icon"];

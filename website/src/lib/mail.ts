@@ -31,13 +31,10 @@ function isConfigured() {
 const label: Record<string, string> = {
   company: "업체명",
   industry: "업종",
-  contactName: "담당자",
+  contactName: "성함",
   phone: "연락처",
   email: "이메일",
-  region: "사업장 지역",
-  items: "세탁 품목",
-  volume: "예상 물량",
-  cycle: "희망 수거 주기",
+  region: "주소",
   message: "문의 내용",
 };
 
@@ -49,9 +46,6 @@ function toRows(input: InquiryInput): [string, string][] {
     ["phone", input.phone],
     ["email", input.email || "—"],
     ["region", input.region],
-    ["items", input.items.length ? input.items.join(", ") : "—"],
-    ["volume", input.volume || "—"],
-    ["cycle", input.cycle || "—"],
     ["message", input.message || "—"],
   ].map(([k, v]) => [label[k] ?? k, v]);
 }

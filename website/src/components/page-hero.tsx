@@ -12,7 +12,7 @@ export function PageHero({
   lede,
   aside,
 }: {
-  eyebrow: string;
+  eyebrow: ReactNode;
   title: ReactNode;
   lede?: ReactNode;
   aside?: ReactNode;

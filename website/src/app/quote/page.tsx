@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { FaqJsonLd, FaqList } from "@/components/faq-list";
+import { Editable } from "@/components/editable";
 import { Icon } from "@/components/icons";
 import { PageHero } from "@/components/page-hero";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
-import { ButtonAnchor, Card, Container, Section, SectionHead } from "@/components/ui";
+import { ButtonAnchor, Card, Container, Section } from "@/components/ui";
 import { businessHours, SAMPLE_CONTENT } from "@/lib/sample";
 import { processSteps } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -20,9 +20,9 @@ export default function QuotePage() {
   return (
     <>
       <PageHero
-        eyebrow="견 적 · 상 담 문 의"
-        title="물량과 주기만 알려주시면 바로 견적을 드립니다"
-        lede="담당자가 확인 후 연락드립니다. 급하시면 전화가 가장 빠릅니다."
+        eyebrow={<Editable k="quote.eyebrow">견 적 · 상 담 문 의</Editable>}
+        title={<Editable k="quote.title">사업장 단위로 계약합니다</Editable>}
+        lede={<Editable k="quote.lede">품목과 물량을 알려주시면 사업장에 맞는 방식으로 안내해 드립니다.</Editable>}
       />
 
       <Section tone="white">
@@ -39,13 +39,20 @@ export default function QuotePage() {
                 <p className="text-[0.6875rem] font-bold tracking-[0.16em] text-pale">
                   상 담 및 견 적 문 의
                 </p>
+                {/* PC 는 표시만, 모바일은 눌러서 전화 (2차 회의) */}
                 <a
                   href={site.telHref}
-                  className="mt-2 block text-[2rem] font-extrabold tracking-[-0.03em] text-white"
+                  className="mt-2 block text-[2rem] font-extrabold tracking-[-0.03em] text-white lg:hidden"
                   data-numeric
                 >
                   {site.tel}
                 </a>
+                <span
+                  className="mt-2 hidden text-[2rem] font-extrabold tracking-[-0.03em] text-white lg:block"
+                  data-numeric
+                >
+                  {site.tel}
+                </span>
                 {businessHours ? (
                   <div className="mt-3.5 text-sm leading-[1.75] text-[#A6C5E8]">
                     <p data-numeric>{businessHours.weekday}</p>
@@ -139,25 +146,6 @@ export default function QuotePage() {
         </Container>
       </Section>
 
-      {/* ═══════════════ 자주 묻는 질문 (전체) ═══════════════ */}
-      <Section tone="tint" id="faq">
-        <Container>
-          <Reveal>
-            <SectionHead
-              eyebrow="자 주 묻 는 질 문"
-              title="문의 전에 확인하실 수 있는 것들"
-              lede="여기에 없는 내용은 전화나 폼으로 물어보시면 바로 답해 드립니다."
-            />
-          </Reveal>
-          <Reveal delay={80}>
-            <div className="mt-9">
-              <FaqList />
-            </div>
-          </Reveal>
-        </Container>
-        <FaqJsonLd />
-      </Section>
-
       <Section tone="white" className="!py-14">
         <Container>
           <Reveal>
@@ -165,7 +153,6 @@ export default function QuotePage() {
               <Icon.pin className="size-5 shrink-0 text-sky" />
               <span>
                 <strong className="font-bold text-navy">{site.address}</strong> ·
-                가정(아파트 · 빌라) 세탁물은 취급하지 않으며 사업장 고객만 거래합니다.
               </span>
             </div>
           </Reveal>

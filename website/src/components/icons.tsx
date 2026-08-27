@@ -188,6 +188,28 @@ export const Icon = {
       <path d="M17 14.8c2.7-.3 4.9 1.6 4.9 4.6" />
     </Base>
   ),
+  /* 문자 — 말풍선 */
+  message: (p: P) => (
+    <Base {...p}>
+      <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-3.2-.5L3 21l1.7-4.6A8.2 8.2 0 0 1 3.6 11.5 8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4Z" />
+    </Base>
+  ),
+  /* 사우나 — 물방울과 열기 */
+  sauna: (p: P) => (
+    <Base {...p}>
+      <path d="M4 20h16" />
+      <path d="M6 16.5V9a6 6 0 0 1 12 0v7.5" />
+      <path d="M9.5 6.2c0-1.2 1-2 1-3.2M14.5 6.2c0-1.2 1-2 1-3.2" />
+      <path d="M12 5.4c0-1.2 1-2 1-3.2" />
+    </Base>
+  ),
+  /* 헬스장 — 덤벨 */
+  gym: (p: P) => (
+    <Base {...p}>
+      <path d="M3.5 9v6M6.5 7.5v9M17.5 7.5v9M20.5 9v6" />
+      <path d="M6.5 12h11" />
+    </Base>
+  ),
 } as const;
 
 export type IconName = keyof typeof Icon;
